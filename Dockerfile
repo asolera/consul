@@ -27,7 +27,6 @@ COPY Gemfile_custom Gemfile_custom
 
 # Prevent bundler warnings; ensure that the bundler version executed is >= that which created Gemfile.lock
 RUN gem install bundler
-RUN gem install capistrano
 
 # Finish establishing our Ruby environment
 RUN bundle install --full-index
@@ -41,5 +40,4 @@ COPY . .
 # Define the script we want run once the container boots
 # Use the "exec" form of CMD so our script shuts down gracefully on SIGTERM (i.e. `docker stop`)
 # CMD [ "config/containers/app_cmd.sh" ]
-# CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
-CMD ["cap", "production", "deploy"]
+CMD ["bundle", "exec", "rails", "server", "-b", "0.0.0.0"]
